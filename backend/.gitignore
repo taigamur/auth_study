@@ -1,0 +1,33 @@
+# 🏗 Python 関連
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+*.db
+*.log
+
+# 📦 仮想環境（venv）
+venv/
+.env
+*.env
+.envrc
+*.ini
+*.cfg
+*.DS_Store
+
+# 🚀 Docker 関連
+mysql_data/
+*.pid
+*.sock
+docker-compose.override.yml
+
+# 🗂️ Alembic（マイグレーション履歴は管理するが、キャッシュ系を除外）
+migrations/__pycache__/
+migrations/versions/__pycache__/
+
+# ⚙️ VSCode/IDE 設定
+.vscode/
+.idea/
+*.iml
+*.sublime-workspace
