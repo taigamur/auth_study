@@ -2,7 +2,22 @@
 
 複数の認証方法を理解するためのhandsonを作成
 
-# Backend
+## 認証プロバイダ
+
+### OICD
+- Auth0
+- Firebase
+
+### OAuth
+- Google
+- GitHub
+
+### SAML
+- Okta
+- keycloak
+
+
+# 🛠 Backend
 
 ## 🚀 Docker で API を起動
 ```bash
@@ -16,7 +31,7 @@ FastAPI では Swagger UI による API ドキュメントを提供していま�
 
 **ReDoc**: [http://localhost:8000/redoc](http://localhost:8000/redoc)
 
-# Frontend
+# 🛠 Frontend
 
 ## 🚀 起動
 ```bash
