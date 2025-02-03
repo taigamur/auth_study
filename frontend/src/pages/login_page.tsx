@@ -1,5 +1,5 @@
 import { Container } from "@mui/material";
-import LoginForm from "../../features/auth/login_form";
+import LoginForm from "../components/features/auth/login_form";
 
 export const LoginPage = () => {
   return (

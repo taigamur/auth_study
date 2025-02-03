@@ -6,8 +6,8 @@ import {
 } from "react-router-dom";
 import "./App.css";
 
-import { LoginPage } from "./components/pages/login_page";
-import { HomePage } from "./components/pages/home_page";
+import { LoginPage } from "./pages";
+import { HomePage } from "./pages/home_page";
 import { useEffect, useState } from "react";
 
 function App() {
@@ -24,14 +24,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route
-          path="/"
-          element={isAuthenticated ? <HomePage /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/login"
-          element={isAuthenticated ? <Navigate to="/" /> : <LoginPage />}
-        />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </Router>
   );
