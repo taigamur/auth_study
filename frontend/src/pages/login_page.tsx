@@ -1,7 +1,12 @@
 import { Container } from "@mui/material";
 import LoginForm from "../components/features/auth/login_form";
+import { useState } from "react";
+import SignupForm from "../components/features/auth/signup_form";
 
 export const LoginPage = () => {
+  const [login, setLogin] = useState(false);
+
+  console.log(login);
   return (
     <Container
       component="main"
@@ -13,7 +18,7 @@ export const LoginPage = () => {
         justifyContent: "center",
       }}
     >
-      <LoginForm />
+      {login ? <LoginForm /> : <SignupForm />}
     </Container>
   );
 };

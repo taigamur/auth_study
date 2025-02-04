@@ -1,8 +1,8 @@
-import React, { useState } from "react";
 import { TextField, Button, Box, Typography } from "@mui/material";
+import React, { useState } from "react";
 import { authApi } from "../../../api";
 
-const LoginForm = () => {
+const SignupForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -15,15 +15,14 @@ const LoginForm = () => {
     }
 
     try {
-      const response = await authApi.login(email, password);
-      localStorage.setItem("authToken", response.data.token);
+      const response = await authApi.signup(email, password);
+      // localStorage.setItem("authToken", response.data.token);
       alert("ログインしました！");
       setError("");
     } catch (error: any) {
       setError(error.response?.data?.message || "ログインに失敗しました。");
     }
   };
-
   return (
     <>
       <Box
@@ -35,7 +34,7 @@ const LoginForm = () => {
         }}
       >
         <Typography variant="h5" gutterBottom>
-          ログイン
+          サインアップ
         </Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{ width: "300px" }}>
           <TextField
@@ -67,7 +66,7 @@ const LoginForm = () => {
             fullWidth
             sx={{ mt: 2 }}
           >
-            ログイン
+            登録
           </Button>
         </Box>
       </Box>
@@ -75,4 +74,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default SignupForm;
