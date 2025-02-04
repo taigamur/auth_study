@@ -26,7 +26,6 @@ migrations/__pycache__/
 migrations/versions/__pycache__/
 
 # ⚙️ VSCode/IDE 設定
-.vscode/
 .idea/
 *.iml
 *.sublime-workspace
