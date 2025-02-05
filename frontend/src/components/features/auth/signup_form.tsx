@@ -20,9 +20,10 @@ const SignupForm = () => {
     try {
       const response = await authApi.signup(name, password);
       // localStorage.setItem("authToken", response.data.token);
-      alert("ログインしました！");
+      alert("登録しました！");
       setError("");
-      setUser(response.data);
+      setUser(response.data.name);
+      sessionStorage.setItem("token", response.data.token);
       // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     } catch (error: any) {
       setError(error.response?.data?.message || "ユーザー登録に失敗しました。");

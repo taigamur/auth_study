@@ -2,7 +2,7 @@ from fastapi import FastAPI, APIRouter, Depends, HTTPException, Response, Reques
 from sqlalchemy.orm import Session
 from passlib.context import CryptContext
 from app.crud import user_crud
-from app.schemas import user_schema
+from app.schemas import user_schema, message_schema
 from app import database, models
 from starlette.middleware.sessions import SessionMiddleware
 import datetime
@@ -71,7 +71,7 @@ def signup(
     return new_user
 
 
-@router.post("/login", response_model=user_schema.LoginRequest)
+@router.post("/login", response_model=user_schema.UserResponse)
 def login(
     response: Response,
     login_request: user_schema.LoginRequest,
@@ -79,16 +79,13 @@ def login(
     db: Session = Depends(database.get_db),
 ):
     user = user_crud.get_user_by_name(db, login_request.name)
-    print(varify_password(login_request.password, user.password))
     if not user or not varify_password(login_request.password, user.password):
         raise HTTPException(status_code=401, detail="認証失敗")
 
-    # セッションにユーザー情報を保存
-    request.session["user"] = {
-        "name": user["name"],
-    }
+    # セッションにtokenを保存（ユーザー名は保存しない）
+    token = create_jwt_token(user.name)
 
-    return {"message": "ログイン成功"}
+    return {"name": user.name, "token": token}
 
 
 @router.post("/logout")
@@ -97,15 +94,16 @@ def logout(request: Request):
     return {"message": "ログアウトしました"}
 
 
-@router.get("/check_login", response_model=None)
+@router.get("/check_login", response_model=user_schema.UserResponse)
 def check_login(
     response: Response,
-    # login_request: user_schema.LoginRequest,
     request: Request,
     db: Session = Depends(database.get_db),
 ):
     token = request.session.get("token")
-    if not token:
-        return {"name": None}
-    name = verify_jwt_token(token)  # JWT の検証
-    return {"name": name}
+    print(token)
+    # if not token:
+    #     raise HTTPException(status_code=400)
+    # name = verify_jwt_token(token)  # JWT の検証
+    # print(name)
+    return {"name": "test", "token": "tmp"}

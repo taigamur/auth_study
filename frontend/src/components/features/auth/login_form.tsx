@@ -18,6 +18,8 @@ const LoginForm = () => {
       const response = await authApi.login(name, password);
       alert("ログインしました！");
       setError("");
+      setName(response.data.name);
+      sessionStorage.setItem("token", response.data.token);
       // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     } catch (error: any) {
       setError(error.response?.data?.message || "ログインに失敗しました。");

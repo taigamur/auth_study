@@ -6,7 +6,7 @@ import { Explain } from "../components/features/auth/explain";
 import { authApi } from "../api";
 
 export const LoginPage = () => {
-  const [login, setLogin] = useState(false);
+  const [login, setLogin] = useState(true);
   const [name, setName] = useState(false);
 
   useEffect(() => {
@@ -22,6 +22,7 @@ export const LoginPage = () => {
   const handleClick = () => {
     setLogin(!login);
   };
+
   return (
     <>
       <div>
