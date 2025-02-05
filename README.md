@@ -31,6 +31,10 @@ FastAPI では Swagger UI による API ドキュメントを提供していま�
 
 **ReDoc**: [http://localhost:8000/redoc](http://localhost:8000/redoc)
 
+## 💡 その他
+
+より詳細のドキュメントはこちら [backend/README.md](../backend/README.md)
+
 # 🛠 Frontend
 
 ## 🚀 起動
@@ -41,3 +45,7 @@ npm run dev
 ## ライブラリ
 
 **MaterialUI**: https://mui.com/material-ui/all-components/
+
+## 💡 その他
+
+より詳細のドキュメントはこちら [backend/README.md](../frontend/README.md)

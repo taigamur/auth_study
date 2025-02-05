@@ -1,23 +1,32 @@
 import axiosClient from "./axios_client";
 
 const authApi = {
-	signup: async(email: string, password: string) => {
-		try{
+	check_login: async () => {
+		try {
+			const response = await axiosClient.get("/check_login");
+			return response.data;
+		} catch (error) {
+			console.error(error);
+			throw error;
+		}
+	},
+	signup: async (name: string, password: string) => {
+		try {
 			const response = await axiosClient.post("/signup", {
-				email,
+				name,
 				password,
 			});
-			return response.data
-		}catch(error){
-			console.error(error)
-			throw error
+			return response.data;
+		} catch (error) {
+			console.error(error);
+			throw error;
 		}
 	},
 
-	login: async (email: string, password: string) => {
+	login: async (name: string, password: string) => {
 		try {
 			const response = await axiosClient.post("/login", {
-				email,
+				name,
 				password,
 			});
 
@@ -28,7 +37,6 @@ const authApi = {
 			throw error;
 		}
 	},
-
 
 	logout: async () => {
 		try {

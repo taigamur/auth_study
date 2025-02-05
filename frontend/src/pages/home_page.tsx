@@ -7,7 +7,7 @@ export const HomePage = () => {
 
       <div style={{}}>
         <div>
-          <Link href="login">email, passwordの認証を試す</Link>
+          <Link href="login">username, passwordの認証を試す</Link>
         </div>
         <div style={{ marginTop: 20 }}>
           <Link href="#">Google OAuth認証を試す</Link>

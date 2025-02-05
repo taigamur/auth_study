@@ -6,3 +6,5 @@ alembic
 cryptography
 itsdangerous
 passlib[bcrypt]
+starlette
+pyjwt

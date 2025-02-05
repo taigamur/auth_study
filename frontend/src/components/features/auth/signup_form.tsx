@@ -3,24 +3,29 @@ import React, { useState } from "react";
 import { authApi } from "../../../api";
 
 const SignupForm = () => {
-  const [email, setEmail] = useState("");
+  const [user, setUser] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  console.log(user);
+
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    if (!email || !password) {
-      setError("Emailとパスワードを入力してください。");
+    if (!name || !password) {
+      setError("Nameとパスワードを入力してください。");
       return;
     }
 
     try {
-      const response = await authApi.signup(email, password);
+      const response = await authApi.signup(name, password);
       // localStorage.setItem("authToken", response.data.token);
       alert("ログインしました！");
       setError("");
+      setUser(response.data);
+      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     } catch (error: any) {
-      setError(error.response?.data?.message || "ログインに失敗しました。");
+      setError(error.response?.data?.message || "ユーザー登録に失敗しました。");
     }
   };
   return (
@@ -38,12 +43,12 @@ const SignupForm = () => {
         </Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{ width: "300px" }}>
           <TextField
-            label="Email"
+            label="Name"
             variant="outlined"
             fullWidth
             margin="normal"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
           <TextField
             label="パスワード"

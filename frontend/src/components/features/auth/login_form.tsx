@@ -3,22 +3,22 @@ import { TextField, Button, Box, Typography } from "@mui/material";
 import { authApi } from "../../../api";
 
 const LoginForm = () => {
-  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    if (!email || !password) {
-      setError("Emailとパスワードを入力してください。");
+    if (!name || !password) {
+      setError("Nameとパスワードを入力してください。");
       return;
     }
 
     try {
-      const response = await authApi.login(email, password);
-      localStorage.setItem("authToken", response.data.token);
+      const response = await authApi.login(name, password);
       alert("ログインしました！");
       setError("");
+      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     } catch (error: any) {
       setError(error.response?.data?.message || "ログインに失敗しました。");
     }
@@ -39,12 +39,12 @@ const LoginForm = () => {
         </Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{ width: "300px" }}>
           <TextField
-            label="Email"
+            label="Name"
             variant="outlined"
             fullWidth
             margin="normal"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
           <TextField
             label="パスワード"
