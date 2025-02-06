@@ -1,60 +1,55 @@
 import { Button, Container } from "@mui/material";
+import { Logout } from "../components/features/auth/logout"; // Add this line to import the Logout component
 import LoginForm from "../components/features/auth/login_form";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import SignupForm from "../components/features/auth/signup_form";
 import { Explain } from "../components/features/auth/explain";
-import { authApi } from "../api";
+import { useAuth } from "../context/auth_context";
 
 export const LoginPage = () => {
-  const [login, setLogin] = useState(true);
-  const [name, setName] = useState(false);
+	const { user } = useAuth();
+	const [loginForm, setLoginForm] = useState(true);
 
-  useEffect(() => {
-    authApi.check_login().then((data) => {
-      console.log(data);
+	const handleClick = () => {
+		setLoginForm(!loginForm);
+	};
 
-      if (data?.name) {
-        setName(data.name);
-      }
-    });
-  }, []);
+	console.log(user);
 
-  const handleClick = () => {
-    setLogin(!login);
-  };
+	console.log(loginForm);
 
-  return (
-    <>
-      <div>
-        {name ? (
-          <span>{name}さん、ログインしています。</span>
-        ) : (
-          <span>ログインしていません。</span>
-        )}
-      </div>
-      <div>
-        <Explain />
-      </div>
-      <Container
-        component="main"
-        maxWidth="md"
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        {login ? <LoginForm /> : <SignupForm />}
-      </Container>
-      {login ? (
-        <Button variant="text" onClick={handleClick}>
-          アカウント登録に切り替え
-        </Button>
-      ) : (
-        <Button variant="text" onClick={handleClick}>
-          ログイン画面に切り替え
-        </Button>
-      )}
-    </>
-  );
+	return (
+		<>
+			<div>
+				{user ? (
+					<span>{user.name}さん、ログインしています。</span>
+				) : (
+					<span>ログインしていません。</span>
+				)}
+			</div>
+			<div>
+				<Explain />
+			</div>
+			<Container
+				component="main"
+				maxWidth="md"
+				sx={{
+					display: "flex",
+					alignItems: "center",
+					justifyContent: "center",
+				}}
+			>
+				{user ? <Logout /> : loginForm ? <LoginForm /> : <SignupForm />}
+			</Container>
+			{loginForm ? (
+				<Button variant="text" onClick={handleClick}>
+					アカウント登録に切り替え
+				</Button>
+			) : (
+				<Button variant="text" onClick={handleClick}>
+					ログイン画面に切り替え
+				</Button>
+			)}
+		</>
+	);
 };

@@ -1,4 +1,12 @@
-from fastapi import FastAPI, APIRouter, Depends, HTTPException, Response, Request
+from fastapi import (
+    FastAPI,
+    APIRouter,
+    Depends,
+    HTTPException,
+    Response,
+    Request,
+    Security,
+)
 from sqlalchemy.orm import Session
 from passlib.context import CryptContext
 from app.crud import user_crud
@@ -8,10 +16,15 @@ from starlette.middleware.sessions import SessionMiddleware
 import datetime
 import jwt
 
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+
 app = FastAPI()
 app.add_middleware(SessionMiddleware, secret_key="your_secret_key")
 
 router = APIRouter()
+
+security = HTTPBearer()
+
 
 SECRET_KEY = "your_super_secret_key"
 
@@ -46,6 +59,18 @@ def varify_password(passwrod, hashed_password):
     return pwd_context.verify(passwrod, hashed_password)
 
 
+def get_current_user(credentials: HTTPAuthorizationCredentials = Security(security)):
+    token = credentials.credentials  # "Bearer {token}" の {token} 部分
+
+    user = verify_jwt_token(token)
+
+    if not user:
+        raise HTTPException(
+            status_code=401, detail="Invalid authentication credentials"
+        )
+    return {"name": user}
+
+
 @router.post("/signup", response_model=user_schema.UserResponse)
 def signup(
     user_data: user_schema.UserCreate,
@@ -73,9 +98,7 @@ def signup(
 
 @router.post("/login", response_model=user_schema.UserResponse)
 def login(
-    response: Response,
     login_request: user_schema.LoginRequest,
-    request: Request,
     db: Session = Depends(database.get_db),
 ):
     user = user_crud.get_user_by_name(db, login_request.name)
@@ -84,7 +107,6 @@ def login(
 
     # セッションにtokenを保存（ユーザー名は保存しない）
     token = create_jwt_token(user.name)
-
     return {"name": user.name, "token": token}
 
 
@@ -92,18 +114,3 @@ def login(
 def logout(request: Request):
     request.session.clear()
     return {"message": "ログアウトしました"}
-
-
-@router.get("/check_login", response_model=user_schema.UserResponse)
-def check_login(
-    response: Response,
-    request: Request,
-    db: Session = Depends(database.get_db),
-):
-    token = request.session.get("token")
-    print(token)
-    # if not token:
-    #     raise HTTPException(status_code=400)
-    # name = verify_jwt_token(token)  # JWT の検証
-    # print(name)
-    return {"name": "test", "token": "tmp"}
