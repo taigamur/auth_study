@@ -5,6 +5,7 @@ import { useState } from "react";
 import SignupForm from "../components/features/auth/signup_form";
 import { Explain } from "../components/features/auth/explain";
 import { useAuth } from "../context/auth_context";
+import { Header } from "../components/features/auth/header";
 
 export const LoginPage = () => {
 	const { user } = useAuth();
@@ -14,19 +15,9 @@ export const LoginPage = () => {
 		setLoginForm(!loginForm);
 	};
 
-	console.log(user);
-
-	console.log(loginForm);
-
 	return (
 		<>
-			<div>
-				{user ? (
-					<span>{user.name}さん、ログインしています。</span>
-				) : (
-					<span>ログインしていません。</span>
-				)}
-			</div>
+			<Header />
 			<div>
 				<Explain />
 			</div>
@@ -37,19 +28,22 @@ export const LoginPage = () => {
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "center",
+					marginTop: 20,
 				}}
 			>
 				{user ? <Logout /> : loginForm ? <LoginForm /> : <SignupForm />}
 			</Container>
-			{loginForm ? (
-				<Button variant="text" onClick={handleClick}>
-					アカウント登録に切り替え
-				</Button>
-			) : (
-				<Button variant="text" onClick={handleClick}>
-					ログイン画面に切り替え
-				</Button>
-			)}
+			<Container>
+				{loginForm ? (
+					<Button variant="text" onClick={handleClick}>
+						アカウント登録に切り替え
+					</Button>
+				) : (
+					<Button variant="text" onClick={handleClick}>
+						ログイン画面に切り替え
+					</Button>
+				)}
+			</Container>
 		</>
 	);
 };
