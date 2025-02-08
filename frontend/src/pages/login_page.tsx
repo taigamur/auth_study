@@ -1,5 +1,5 @@
 import { Button, Container } from "@mui/material";
-import { Logout } from "../components/features/auth/logout"; // Add this line to import the Logout component
+import { Logout } from "../components/features/auth/logout";
 import LoginForm from "../components/features/auth/login_form";
 import { useState } from "react";
 import SignupForm from "../components/features/auth/signup_form";
@@ -7,20 +7,24 @@ import { Explain } from "../components/features/auth/explain";
 import { useAuth } from "../context/auth_context";
 import { Header } from "../components/features/auth/header";
 
+enum AuthFormState {
+	Login = 0,
+	Signup = 1,
+}
+
 export const LoginPage = () => {
 	const { user } = useAuth();
-	const [loginForm, setLoginForm] = useState(true);
+	const [authForm, setAuthForm] = useState(AuthFormState.Login);
 
-	const handleClick = () => {
-		setLoginForm(!loginForm);
+	const toggleForm = () => {
+		setAuthForm((prev) =>
+			prev === AuthFormState.Login ? AuthFormState.Signup : AuthFormState.Login,
+		);
 	};
 
 	return (
 		<>
 			<Header />
-			<div>
-				<Explain />
-			</div>
 			<Container
 				component="main"
 				maxWidth="md"
@@ -28,22 +32,30 @@ export const LoginPage = () => {
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "center",
-					marginTop: 20,
+					marginTop: 12,
+					flexDirection: "column", // 縦方向に配置
 				}}
 			>
-				{user ? <Logout /> : loginForm ? <LoginForm /> : <SignupForm />}
-			</Container>
-			<Container>
-				{loginForm ? (
-					<Button variant="text" onClick={handleClick}>
-						アカウント登録に切り替え
-					</Button>
+				{/* ユーザーがログイン済みなら Logout、未ログインならログイン or サインアップ */}
+				{user ? (
+					<Logout />
+				) : authForm === AuthFormState.Login ? (
+					<LoginForm />
 				) : (
-					<Button variant="text" onClick={handleClick}>
-						ログイン画面に切り替え
+					<SignupForm />
+				)}
+				{/* フォームの切り替えボタン */}
+				{!user && (
+					<Button variant="text" onClick={toggleForm} sx={{ marginTop: 2 }}>
+						{authForm === AuthFormState.Login
+							? "アカウント登録に切り替え"
+							: "ログイン画面に切り替え"}
 					</Button>
 				)}
 			</Container>
+
+			{/* 説明コンポーネント */}
+			<Explain />
 		</>
 	);
 };

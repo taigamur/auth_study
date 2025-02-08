@@ -1,8 +1,10 @@
 import { TextField, Button, Box, Typography } from "@mui/material";
-import React, { useState } from "react";
-import { authApi } from "../../../api";
+import { useState } from "react";
+import { HeadingTitle } from "../../common/heading_title";
+import { useAuth } from "../../../context/auth_context";
 
 const SignupForm = () => {
+	const { signup } = useAuth();
 	const [name, setName] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState("");
@@ -25,12 +27,11 @@ const SignupForm = () => {
 		}
 
 		try {
-			const data = await authApi.signup(name, password);
+			await signup(name, password);
 			alert("登録しました！");
 			setError("");
-			sessionStorage.setItem("token", data.token);
-			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-		} catch (error: any) {
+		} catch (error) {
+			console.error(error);
 			setError("ユーザー登録に失敗しました。");
 		}
 	};
@@ -44,9 +45,7 @@ const SignupForm = () => {
 					justifyContent: "center",
 				}}
 			>
-				<Typography variant="h5" gutterBottom>
-					サインアップ
-				</Typography>
+				<HeadingTitle title="登録" />
 				<Box component="form" onSubmit={handleSubmit} sx={{ width: "300px" }}>
 					<TextField
 						label="Name"

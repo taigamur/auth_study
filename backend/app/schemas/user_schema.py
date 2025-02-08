@@ -8,6 +8,7 @@ class UserCreate(BaseModel):
 
 class UserResponse(BaseModel):
     name: str
+    token: str
 
     class Config:
         from_attributes = True

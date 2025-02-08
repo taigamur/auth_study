@@ -1,6 +1,15 @@
 import axiosClient from "./axios_client";
 
 const authApi = {
+	fetchUser: async () => {
+		try {
+			const response = await axiosClient.get("/user");
+			return response.data;
+		} catch (error) {
+			console.error(error);
+			throw error;
+		}
+	},
 	signup: async (name: string, password: string) => {
 		try {
 			const response = await axiosClient.post("/signup", {
@@ -33,7 +42,7 @@ const authApi = {
 			const response = await axiosClient.post("/logout");
 			return response.data;
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 			throw error;
 		}
 	},

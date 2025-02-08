@@ -1,34 +1,45 @@
-import { Box, Button, Modal, Typography } from "@mui/material";
-import { useState } from "react";
+import { Box, Container, Link, Typography } from "@mui/material";
+import { HeadingTitle } from "../../common/heading_title";
+import ReactMarkdown from "react-markdown";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { darcula } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+import remarkGfm from "remark-gfm";
 
 export const Explain = () => {
-  const [open, setOpen] = useState(false);
+	const text = `
+* このページではID/PASSを使用した認証方法を説明
+* クライアント側からID/PASSを送信
+* サーバー側でPASSをハッシュ化してDBに保存
+* IDをjwt_tokenに変換してsessionに"session"というkeyで保存
+* クライアントは都度sessionを送り、サーバー側でユーザーを検証している
+* [ ] todo
+`;
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
+	const codeString = `
+  # test
+  yarn install
+  `;
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-  return (
-    <>
-      <Button onClick={handleOpen}>このログイン機能の仕組み</Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
-        </Box>
-      </Modal>
-    </>
-  );
+	return (
+		<Container sx={{ marginTop: 5, width: 700 }}>
+			<Box sx={{ textAlign: "center" }}>
+				<HeadingTitle title="この認証方法の仕組み" />
+				<Link
+					underline="none"
+					href="https://github.com/taigamur/auth_study/blob/main/frontend/src/components/features/auth/explain.tsx"
+					target="_blank"
+				>
+					GitHubのMarkdownページ
+				</Link>
+			</Box>
+
+			{/* <Box>
+				<ReactMarkdown remarkPlugins={[remarkGfm]}>{text}</ReactMarkdown>
+				<SyntaxHighlighter language="javascript" style={darcula}>
+					{codeString}
+				</SyntaxHighlighter>
+			</Box> */}
+		</Container>
+	);
 };

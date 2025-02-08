@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { TextField, Button, Box, Typography } from "@mui/material";
-import { authApi } from "../../../api";
 import { useAuth } from "../../../context/auth_context";
+import { HeadingTitle } from "../../common/heading_title";
 
 const LoginForm = () => {
 	const [name, setName] = useState<string | null>(null);
@@ -18,13 +18,9 @@ const LoginForm = () => {
 		}
 
 		try {
-			const data = await authApi.login(name, password);
-			alert("ログインしました！");
+			await login(name, password);
 			setError(null);
-
-			login({ name: data.name });
-
-			sessionStorage.setItem("token", data.token);
+			alert("ログイン成功！");
 		} catch (error) {
 			setError("ログインに失敗しました。");
 		}
@@ -40,9 +36,7 @@ const LoginForm = () => {
 					justifyContent: "center",
 				}}
 			>
-				<Typography variant="h5" gutterBottom>
-					ログイン
-				</Typography>
+				<HeadingTitle title="ログイン" />
 				<Box component="form" onSubmit={handleSubmit} sx={{ width: "300px" }}>
 					<TextField
 						label="Name"

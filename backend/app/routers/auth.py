@@ -68,7 +68,16 @@ def get_current_user(credentials: HTTPAuthorizationCredentials = Security(securi
         raise HTTPException(
             status_code=401, detail="Invalid authentication credentials"
         )
-    return {"name": user}
+    return {"name": user, "token": token}
+
+
+@router.get("/user", response_model=user_schema.UserResponse)
+def fetch_user(
+    user=Depends(get_current_user),
+    credentials: HTTPAuthorizationCredentials = Security(security),
+):
+
+    return user
 
 
 @router.post("/signup", response_model=user_schema.UserResponse)
@@ -91,9 +100,7 @@ def signup(
 
     # セッションにtokenを保存（ユーザー名は保存しない）
     token = create_jwt_token(new_user.name)
-    request.session["token"] = token
-
-    return new_user
+    return {"name": new_user.name, "token": token}
 
 
 @router.post("/login", response_model=user_schema.UserResponse)

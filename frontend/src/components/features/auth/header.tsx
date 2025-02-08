@@ -4,11 +4,6 @@ import { useAuth } from "../../../context/auth_context";
 export const Header = () => {
 	const { user } = useAuth();
 
-	console.log(user);
-
-	const navItems = ["A", "B"];
-
-	// const handleDrawerToggle = () => {};
 	return (
 		<AppBar component="nav">
 			<Toolbar>
@@ -17,14 +12,16 @@ export const Header = () => {
 					component="div"
 					sx={{ display: { xs: "none", sm: "block" } }}
 				>
-					{user ? user.name : "ログインしていません"}
+					このページはID/PASS認証のためのページです
 				</Typography>
 				<Box sx={{ display: { xs: "none", sm: "block" }, marginLeft: "auto" }}>
-					{navItems.map((item) => (
-						<Button key={item} sx={{ color: "#fff" }}>
-							{item}
-						</Button>
-					))}
+					<Typography
+						variant="body1"
+						component="div"
+						sx={{ display: { xs: "none", sm: "block" } }}
+					>
+						{user ? user.name : "ログインしていません"}
+					</Typography>
 				</Box>
 			</Toolbar>
 		</AppBar>

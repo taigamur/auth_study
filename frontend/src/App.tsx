@@ -10,6 +10,7 @@ import { LoginPage } from "./pages/login_page";
 import { HomePage } from "./pages/home_page";
 import { useEffect, useState } from "react";
 import { AuthProvider } from "./context/auth_context";
+import { NotFoundPage } from "./pages/not_found_page";
 
 function App() {
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -35,6 +36,7 @@ function App() {
 						</AuthProvider>
 					}
 				/>
+				<Route path="*" element={<NotFoundPage />} />
 			</Routes>
 		</Router>
 	);
