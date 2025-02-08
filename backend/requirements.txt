@@ -4,3 +4,7 @@ sqlalchemy
 pymysql
 alembic
 cryptography
+itsdangerous
+passlib[bcrypt]
+starlette
+pyjwt
