@@ -21,7 +21,7 @@
 
 ## 🚀 Docker で API を起動
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 ## 📖 API ドキュメント
 FastAPI では Swagger UI による API ドキュメントを提供しています。
