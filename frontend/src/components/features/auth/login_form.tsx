@@ -66,6 +66,7 @@ const LoginForm = () => {
 						color="primary"
 						fullWidth
 						sx={{ mt: 2 }}
+						disabled={!name || !password}
 					>
 						ログイン
 					</Button>
