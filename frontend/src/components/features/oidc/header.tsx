@@ -1,11 +1,12 @@
 import { AppBar, Box, Link, Toolbar, Typography } from "@mui/material";
+import type { User } from "./type";
 
 type HeaderProps = {
-	email?: string;
+	user?: User;
 };
 
 export const Header = (props: HeaderProps) => {
-	const { email } = props;
+	const { user } = props;
 	return (
 		<AppBar component="nav">
 			<Toolbar>
@@ -22,7 +23,7 @@ export const Header = (props: HeaderProps) => {
 						component="div"
 						sx={{ display: { xs: "none", sm: "block" } }}
 					>
-						{email || "ログインしていません"}
+						{user ? user.email : "ログインしていません"}
 					</Typography>
 					<Link href="/">
 						<Typography

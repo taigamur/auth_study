@@ -1,8 +1,10 @@
-import { CircularProgress, Container, Icon } from "@mui/material";
+import { CircularProgress, Container } from "@mui/material";
 import { Header } from "../components/features/oidc/header";
 import { useAuth0, type GetTokenSilentlyOptions } from "@auth0/auth0-react";
 import { LoginButton } from "../components/features/oidc/login_button";
 import LogoutButton from "../components/features/oidc/logout_button";
+import { Explain } from "../components/features/oidc/explain";
+import { Message } from "../components/features/oidc/message";
 
 export const OidcPage = () => {
 	// const { getAccessTokenSilently } = useAuth0();
@@ -25,13 +27,6 @@ export const OidcPage = () => {
 	const { user, isAuthenticated, isLoading, getAccessTokenSilently } =
 		useAuth0();
 
-	console.log(`user: ${user ? Object.keys(user) : "undefined"}`);
-	console.log(user?.given_name);
-	console.log(user?.email);
-	console.log(user?.email_verified);
-	console.log(`authenticated: ${isAuthenticated}`);
-	console.log(isLoading);
-
 	getAccessTokenSilently({
 		audience: "https://auth_study.local/",
 	} as GetTokenSilentlyOptions)
@@ -42,7 +37,7 @@ export const OidcPage = () => {
 
 	return (
 		<>
-			<Header email={user?.email} />
+			<Header user={user} />
 			<Container
 				component="main"
 				maxWidth="md"
@@ -61,6 +56,8 @@ export const OidcPage = () => {
 				) : (
 					<LoginButton />
 				)}
+				<Explain />
+				<Message />
 			</Container>
 		</>
 	);
