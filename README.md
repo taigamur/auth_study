@@ -49,3 +49,7 @@ npm run dev
 ## 💡 その他
 
 より詳細のドキュメントはこちら [backend/README.md](../frontend/README.md)
+
+
+## 認証方法
+* [OIDC (Notion)](https://zesty-address-ae0.notion.site/OIDC-1b47d2e4bbf88006a111e360577911e3?pvs=4)
