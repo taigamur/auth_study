@@ -1,18 +1,18 @@
 import {
+	Navigate,
+	Route,
 	BrowserRouter as Router,
 	Routes,
-	Route,
-	Navigate,
 } from "react-router-dom";
 import "./App.css";
 
-import { LoginPage } from "./pages/login_page";
-import { HomePage } from "./pages/home_page";
+import { Auth0Provider } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
 import { AuthProvider } from "./context/auth_context";
+import { HomePage } from "./pages/home_page";
+import { LoginPage } from "./pages/login_page";
 import { NotFoundPage } from "./pages/not_found_page";
 import { OidcPage } from "./pages/oidc_page";
-import { Auth0Provider } from "@auth0/auth0-react";
 
 function App() {
 	const [isAuthenticated, setIsAuthenticated] = useState(false);

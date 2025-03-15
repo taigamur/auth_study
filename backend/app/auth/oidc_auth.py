@@ -1,41 +1,40 @@
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi import HTTPException, Depends
-import requests
 import os
 import jwt
-
-security = HTTPBearer()
-
-AUTH0_DOMAIN = os.getenv("AUTH0_DOMAIN")
-API_AUDIENCE = os.getenv("AUTH0_AUDIENCE")
-ALGORITHMS = ["RS256"]
+from typing import Optional
 
 
-def verify_jwt(credentials: HTTPAuthorizationCredentials = Depends(security)):
-    token = credentials.credentials
-    try:
-        jwks_url = f"https://{AUTH0_DOMAIN}/.well-known/jwks.json"
-        jwks = requests.get(jwks_url).json()
-        unverified_header = jwt.get_unverified_header(token)
-        rsa_key = next(
-            (key for key in jwks["keys"] if key["kid"] == unverified_header["kid"]),
-            None,
-        )
+class VerfifyAuth0Token:
 
-        if not rsa_key:
-            raise HTTPException(status_code=401, detail="Unauthorized: Invalid key")
+    def __init__(self):
+        self.AUTH0_DOMAIN = os.getenv("AUTH0_DOMAIN")
+        self.API_AUDIENCE = os.getenv("AUTH0_AUDIENCE")
+        self.ALGORITHMS = ["RS256"]
 
-        payload = jwt.decode(
-            token,
-            rsa_key,
-            algorithms=ALGORITHMS,
-            audience=API_AUDIENCE,
-            issuer=f"https://{AUTH0_DOMAIN}/",
-        )
-        return payload
-    except jwt.ExpiredSignatureError:
-        raise HTTPException(status_code=401, detail="Token expired")
-    except jwt.JWTClaimsError:
-        raise HTTPException(status_code=401, detail="Invalid claims")
-    except Exception:
-        raise HTTPException(status_code=401, detail="Invalid token")
+        jwks_url = f"https://{self.AUTH0_DOMAIN}/.well-known/jwks.json"
+        self.jwks_client = jwt.PyJWKClient(jwks_url)
+
+    async def verify_jwt(
+        self, token: Optional[HTTPAuthorizationCredentials] = Depends(HTTPBearer())
+    ):
+        try:
+            signing_key = self.jwks_client.get_signing_key_from_jwt(
+                token.credentials
+            ).key
+        except jwt.exceptions.PyJWKClientError as error:
+            raise HTTPException(status_code=403, detail=str(error))
+        except jwt.exceptions.DecodeError as error:
+            raise HTTPException(status_code=403, detail=str(error))
+
+        try:
+            payload = jwt.decode(
+                token.credentials,
+                signing_key,
+                algorithms=self.ALGORITHMS,
+                audience=self.API_AUDIENCE,
+                issuer=f"https://{self.AUTH0_DOMAIN}/",
+            )
+            return payload
+        except Exception as error:
+            raise HTTPException(status_code=403, detail=str(error))

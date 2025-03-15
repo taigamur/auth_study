@@ -1,11 +1,11 @@
 import { Button, Container } from "@mui/material";
-import { Logout } from "../components/features/auth/logout";
-import LoginForm from "../components/features/auth/login_form";
 import { useState } from "react";
-import SignupForm from "../components/features/auth/signup_form";
 import { Explain } from "../components/features/auth/explain";
-import { useAuth } from "../context/auth_context";
 import { Header } from "../components/features/auth/header";
+import LoginForm from "../components/features/auth/login_form";
+import { Logout } from "../components/features/auth/logout";
+import SignupForm from "../components/features/auth/signup_form";
+import { useAuth } from "../context/auth_context";
 
 enum AuthFormState {
 	Login = 0,

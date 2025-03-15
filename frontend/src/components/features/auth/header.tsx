@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, Link, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, Link, Toolbar, Typography } from "@mui/material";
 import { useAuth } from "../../../context/auth_context";
 
 export const Header = () => {

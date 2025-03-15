@@ -1,7 +1,7 @@
-import { TextField, Button, Box, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import { useState } from "react";
-import { HeadingTitle } from "../../common/heading_title";
 import { useAuth } from "../../../context/auth_context";
+import { HeadingTitle } from "../../common/heading_title";
 
 const SignupForm = () => {
 	const { signup } = useAuth();
