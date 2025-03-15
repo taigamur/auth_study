@@ -11,6 +11,8 @@ export type MessageProps = {
 export const Message = (props: MessageProps) => {
 	const { user } = props;
 
+	console.log(user);
+
 	const { getAccessTokenSilently } = useAuth0();
 
 	const [loading, setLoading] = useState(false);
