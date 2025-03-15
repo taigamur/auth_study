@@ -1,5 +1,5 @@
 import { type GetTokenSilentlyOptions, useAuth0 } from "@auth0/auth0-react";
-import { Box, Button, CircularProgress } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
 import type { User } from "../type";
