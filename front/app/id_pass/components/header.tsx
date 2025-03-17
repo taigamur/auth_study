@@ -1,14 +1,8 @@
-"use client";
-
 import { AppBar, Box, Link, Toolbar, Typography } from "@mui/material";
-import type { User } from "../type";
+import { useAuth } from "../auth_context";
 
-type HeaderProps = {
-	user?: User;
-};
-
-export const Header = (props: HeaderProps) => {
-	const { user } = props;
+export const Header = () => {
+	const { user } = useAuth();
 
 	return (
 		<AppBar component="nav">
@@ -18,7 +12,7 @@ export const Header = (props: HeaderProps) => {
 					component="div"
 					sx={{ display: { xs: "none", sm: "block" } }}
 				>
-					このページはOIDC認証のためのページです
+					このページはID/PASS認証のためのページです
 				</Typography>
 				<Box sx={{ display: { xs: "none", sm: "flex" }, marginLeft: "auto" }}>
 					<Typography
@@ -26,7 +20,7 @@ export const Header = (props: HeaderProps) => {
 						component="div"
 						sx={{ display: { xs: "none", sm: "block" } }}
 					>
-						{user ? user.email : "ログインしていません"}
+						{user ? user.name : "ログインしていません"}
 					</Typography>
 					<Link href="/">
 						<Typography

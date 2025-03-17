@@ -1,7 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { Box, CircularProgress, Container } from "@mui/material";
 import { Explain } from "../components/features/oidc/explain";
-import { Header } from "../components/features/oidc/header";
+import { Header } from "./components'header";
 import { LoginButton } from "../components/features/oidc/login_button";
 import LogoutButton from "../components/features/oidc/logout_button";
 import { Message } from "../components/features/oidc/message";
