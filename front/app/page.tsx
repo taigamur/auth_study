@@ -1,6 +1,6 @@
 "use client";
 
-import { Link } from "@mui/material";
+import { Box, Link } from "@mui/material";
 import styled from "styled-components";
 
 const LinkWrapper = styled.div`
@@ -13,7 +13,7 @@ const LinkWrapper = styled.div`
 const HomePage = () => {
 	return (
 		<>
-			<div style={{ marginTop: 40, textAlign: "center" }}>
+			<Box sx={{ textAlign: "center", m: 10 }}>
 				各認証方法のサンプル実装
 				<div style={{ marginTop: 20 }}>
 					<Link
@@ -25,14 +25,9 @@ const HomePage = () => {
 					</Link>
 				</div>
 				<LinkWrapper>
-					<div>
-						<Link href="id_pass" underline="none">
-							ID/PASS認証を試す
-						</Link>
-					</div>
-					<div style={{ marginTop: 20 }}>
-						<Link href="#" underline="none">
-							Google OAuth認証を試す
+					<div style={{ marginTop: 0 }}>
+						<Link href="oidc" underline="none">
+							OIDC認証を試す（Auth0）
 						</Link>
 					</div>
 					<div style={{ marginTop: 20 }}>
@@ -41,12 +36,17 @@ const HomePage = () => {
 						</Link>
 					</div>
 					<div style={{ marginTop: 20 }}>
-						<Link href="oidc" underline="none">
-							OIDC認証を試す（Auth0）
+						<Link href="#" underline="none">
+							Google OAuth認証を試す
+						</Link>
+					</div>
+					<div style={{ marginTop: 20 }}>
+						<Link href="id_pass" underline="none">
+							ID/PASS認証を試す
 						</Link>
 					</div>
 				</LinkWrapper>
-			</div>
+			</Box>
 		</>
 	);
 };
