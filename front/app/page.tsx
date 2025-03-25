@@ -31,15 +31,15 @@ const HomePage = () => {
 						</Link>
 					</div>
 					<div style={{ marginTop: 20 }}>
-						<Link href="#" underline="none">
-							SAML認証を試す
+						<Link href="oidc2" underline="none">
+							OIDC認証を試す（Google）
 						</Link>
 					</div>
-					<div style={{ marginTop: 20 }}>
+					{/* <div style={{ marginTop: 20 }}>
 						<Link href="#" underline="none">
-							Google OAuth認証を試す
+							【未着手】OAuth2.0を試す（Google）
 						</Link>
-					</div>
+					</div> */}
 					<div style={{ marginTop: 20 }}>
 						<Link href="id_pass" underline="none">
 							ID/PASS認証を試す
