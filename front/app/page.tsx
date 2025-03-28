@@ -1,52 +1,199 @@
 "use client";
 
-import { Box, Link } from "@mui/material";
-import styled from "styled-components";
-
-const LinkWrapper = styled.div`
-  border: 1px solid black;
-  width: 600px;
-  margin: 32px auto;
-  padding: 16px 0px;
-`;
+import {
+	AppBar,
+	Box,
+	Button,
+	Card,
+	CardActionArea,
+	CardContent,
+	Container,
+	Divider,
+	Grid,
+	Link,
+	Toolbar,
+	Typography,
+} from "@mui/material";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LockIcon from "@mui/icons-material/Lock";
+import GoogleIcon from "@mui/icons-material/Google";
+import KeyIcon from "@mui/icons-material/Key";
 
 const HomePage = () => {
 	return (
 		<>
-			<Box sx={{ textAlign: "center", m: 10 }}>
-				各認証方法のサンプル実装
-				<div style={{ marginTop: 20 }}>
-					<Link
+			<AppBar position="static" color="transparent" elevation={0}>
+				<Toolbar>
+					<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+						認証サンプル
+					</Typography>
+					<Button
+						color="inherit"
 						href="https://github.com/taigamur/auth_study"
-						underline="none"
 						target="_blank"
+						startIcon={<GitHubIcon />}
 					>
-						GitHub（taigamur/auth_study）
-					</Link>
-				</div>
-				<LinkWrapper>
-					<div style={{ marginTop: 0 }}>
-						<Link href="oidc" underline="none">
-							OIDC認証を試す（Auth0）
+						GitHub
+					</Button>
+				</Toolbar>
+			</AppBar>
+
+			<Container maxWidth="md">
+				<Box
+					sx={{
+						display: "flex",
+						flexDirection: "column",
+						alignItems: "center",
+						mt: 8,
+						mb: 6,
+					}}
+				>
+					<Typography
+						variant="h4"
+						component="h1"
+						gutterBottom
+						align="center"
+						sx={{ fontWeight: 600 }}
+					>
+						認証のサンプル実装
+					</Typography>
+					<Typography
+						variant="subtitle1"
+						color="text.secondary"
+						align="center"
+						sx={{ mb: 4, maxWidth: "600px" }}
+					>
+						このアプリケーションでは、いくつかの認証方法を試すことができます。
+					</Typography>
+				</Box>
+
+				<Grid container spacing={4} sx={{ mb: 8 }}>
+					<Grid item xs={12} md={4}>
+						<Card
+							sx={{
+								height: "100%",
+								display: "flex",
+								flexDirection: "column",
+								transition: "transform 0.2s",
+								"&:hover": {
+									transform: "translateY(-4px)",
+									boxShadow: 4,
+								},
+							}}
+						>
+							<CardActionArea component="a" href="oidc">
+								<Box
+									sx={{
+										height: 140,
+										bgcolor: "primary.light",
+										display: "flex",
+										alignItems: "center",
+										justifyContent: "center",
+									}}
+								>
+									<LockIcon sx={{ fontSize: 60, color: "white" }} />
+								</Box>
+								<CardContent sx={{ flexGrow: 1 }}>
+									<Typography gutterBottom variant="h5" component="h2">
+										OIDC認証（Auth0）
+									</Typography>
+									<Typography>
+										Auth0を使用したOIDC認証の実装例です。シングルサインオンやソーシャルログインの機能を提供します。
+									</Typography>
+								</CardContent>
+							</CardActionArea>
+						</Card>
+					</Grid>
+					<Grid item xs={12} md={4}>
+						<Card
+							sx={{
+								height: "100%",
+								display: "flex",
+								flexDirection: "column",
+								transition: "transform 0.2s",
+								"&:hover": {
+									transform: "translateY(-4px)",
+									boxShadow: 4,
+								},
+							}}
+						>
+							<CardActionArea component="a" href="oidc2">
+								<Box
+									sx={{
+										height: 140,
+										bgcolor: "#4285F4",
+										display: "flex",
+										alignItems: "center",
+										justifyContent: "center",
+									}}
+								>
+									<GoogleIcon sx={{ fontSize: 60, color: "white" }} />
+								</Box>
+								<CardContent sx={{ flexGrow: 1 }}>
+									<Typography gutterBottom variant="h5" component="h2">
+										OIDC認証（Google）
+									</Typography>
+									<Typography>
+										Googleを使用したOIDC認証の実装例です。Googleアカウントを使用してログインできます。
+									</Typography>
+								</CardContent>
+							</CardActionArea>
+						</Card>
+					</Grid>
+					<Grid item xs={12} md={4}>
+						<Card
+							sx={{
+								height: "100%",
+								display: "flex",
+								flexDirection: "column",
+								transition: "transform 0.2s",
+								"&:hover": {
+									transform: "translateY(-4px)",
+									boxShadow: 4,
+								},
+							}}
+						>
+							<CardActionArea component="a" href="id_pass">
+								<Box
+									sx={{
+										height: 140,
+										bgcolor: "secondary.main",
+										display: "flex",
+										alignItems: "center",
+										justifyContent: "center",
+									}}
+								>
+									<KeyIcon sx={{ fontSize: 60, color: "white" }} />
+								</Box>
+								<CardContent sx={{ flexGrow: 1 }}>
+									<Typography gutterBottom variant="h5" component="h2">
+										ID/PASS認証
+									</Typography>
+									<Typography>
+										従来のID/パスワード認証の実装例です。ユーザー登録、ログイン、ログアウト機能を提供します。
+									</Typography>
+								</CardContent>
+							</CardActionArea>
+						</Card>
+					</Grid>
+				</Grid>
+
+				<Divider sx={{ mb: 4 }} />
+
+				<Box sx={{ textAlign: "center", mb: 8 }}>
+					<Typography variant="body2" color="text.secondary" align="center">
+						© 2025 認証サンプル実装 -
+						<Link
+							href="https://github.com/taigamur/auth_study"
+							underline="hover"
+							target="_blank"
+							sx={{ ml: 0.5 }}
+						>
+							GitHub（taigamur/auth_study）
 						</Link>
-					</div>
-					<div style={{ marginTop: 20 }}>
-						<Link href="oidc2" underline="none">
-							OIDC認証を試す（Google）
-						</Link>
-					</div>
-					{/* <div style={{ marginTop: 20 }}>
-						<Link href="#" underline="none">
-							【未着手】OAuth2.0を試す（Google）
-						</Link>
-					</div> */}
-					<div style={{ marginTop: 20 }}>
-						<Link href="id_pass" underline="none">
-							ID/PASS認証を試す
-						</Link>
-					</div>
-				</LinkWrapper>
-			</Box>
+					</Typography>
+				</Box>
+			</Container>
 		</>
 	);
 };
