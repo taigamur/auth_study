@@ -71,14 +71,6 @@ npm install  # 初回のみ
 npm run dev
 ```
 
-## 使用ライブラリ
-
-### UI
-- **Material UI (MUI)**: [https://mui.com/material-ui/](https://mui.com/material-ui/)
-
-### 認証関連
-- **@auth0/auth0-react**: Auth0を使用したOIDC認証
-- **next-auth**: Googleを使用したOIDC認証
 
 ## プロジェクト構成
 
@@ -93,29 +85,13 @@ front/
 
 ## 認証方法の詳細
 
-### OIDC認証の特徴
-- **標準化された認証プロトコル**: OpenID Connect (OIDC) は OAuth 2.0 をベースにした標準化された認証プロトコル
-- **セキュリティ**: トークンベースの認証で、JWTを使用
-- **シングルサインオン**: 複数のアプリケーションで同じ認証情報を使用可能
-- **外部IDプロバイダ**: Auth0やGoogleなどの外部サービスに認証を委任
+- [OIDC認証(Notion)](https://zesty-address-ae0.notion.site/OIDC-1b47d2e4bbf88006a111e360577911e3)
 
-#### Auth0 OIDC実装
-- `@auth0/auth0-react` ライブラリを使用
-- Auth0テナントの設定が必要
-- 詳細: [OIDC (Notion)](https://zesty-address-ae0.notion.site/OIDC-1b47d2e4bbf88006a111e360577911e3?pvs=4)
+- [Auth0を使った認証 (Notion)](https://zesty-address-ae0.notion.site/Auth0-1bc7d2e4bbf8801fa72deb54c7bac101)
 
-#### Google OIDC実装
-- `next-auth` ライブラリを使用
-- Google Cloud Platformでの設定が必要
-- OAuth 2.0クライアントIDとシークレットの取得
+- [Googleを使った認証(Notion)](https://zesty-address-ae0.notion.site/Google-1bc7d2e4bbf8809589e9cb30ef06cc9f)
 
-### ID/PASS認証の特徴
-- **従来型の認証方式**: ユーザー名とパスワードによる認証
-- **バックエンド連携**: フロントエンドからバックエンドAPIへの認証リクエスト
-- **JWTトークン**: 認証成功時にJWTトークンを発行
-- **セキュリティ考慮点**: パスワードハッシュ化、HTTPS通信、CSRF対策など
-
-## セットアップガイド
+<!-- ## セットアップガイド
 
 各認証方法を試すには、それぞれ以下の設定が必要です：
 
@@ -133,4 +109,4 @@ front/
 ### ID/PASS認証設定
 1. バックエンドを起動
 2. フロントエンドを起動
-3. アカウント登録画面からユーザー登録
+3. アカウント登録画面からユーザー登録 -->
