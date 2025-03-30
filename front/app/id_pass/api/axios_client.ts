@@ -14,7 +14,10 @@ const axiosClient = axios.create({
 
 // リクエストのインターセプター（認証トークンの追加など）
 axiosClient.interceptors.request.use((config) => {
-	const token = localStorage.getItem("token");
+	const token =
+		typeof sessionStorage !== "undefined"
+			? sessionStorage.getItem("token")
+			: "";
 	if (token) {
 		config.headers.Authorization = `Bearer ${token}`;
 	}

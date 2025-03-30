@@ -8,8 +8,8 @@ type User = { name: string; token: string } | null;
 
 const AuthContext = createContext<{
 	user: User;
-	signup: (name: string, token: string) => void;
-	login: (name: string, token: string) => void;
+	signup: (name: string, password: string) => void;
+	login: (name: string, password: string) => void;
 	logout: () => void;
 }>({
 	user: null,
@@ -26,37 +26,51 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 	});
 
 	useEffect(() => {
-		const fetchUser = async () => {
-			try {
-				const data = await authApi.fetchUser();
-				setUser({ name: data.name, token: data.token });
-			} catch (error) {
-				console.error("ユーザー取得エラー", error);
-				setUser(null);
-			}
-		};
-		fetchUser();
+		const token = sessionStorage.getItem("token");
+		if (token) {
+			const fetchUser = async () => {
+				try {
+					const data = await authApi.fetchUser();
+					setUser({ name: data.name, token: data.token });
+				} catch (error) {
+					console.error("ユーザー取得エラー", error);
+					setUser(null);
+				}
+			};
+			fetchUser();
+		}
 	}, []);
 
 	const login = async (name: string, password: string) => {
-		const data = await authApi.login(name, password);
-		const token = data.token;
-		sessionStorage.setItem("token", data.token);
-		console.log(name);
-		console.log(token);
-		setUser({ name, token });
+		try {
+			const data = await authApi.login(name, password);
+			const token = data.token;
+			sessionStorage.setItem("token", token);
+			sessionStorage.setItem("name", name);
+			setUser({ name, token });
+		} catch (error) {
+			console.error("ログインエラー", error);
+			throw error;
+		}
 	};
 
 	const signup = async (name: string, password: string) => {
-		const data = await authApi.signup(name, password);
-		const token = data.token;
-		sessionStorage.setItem("token", data.token);
-		setUser({ name, token });
+		try {
+			const data = await authApi.signup(name, password);
+			const token = data.token;
+			sessionStorage.setItem("token", token);
+			sessionStorage.setItem("name", name);
+			setUser({ name, token });
+		} catch (error) {
+			console.error("サインアップエラー", error);
+			throw error;
+		}
 	};
 
 	const logout = () => {
 		setUser(null);
 		sessionStorage.removeItem("token");
+		sessionStorage.removeItem("name");
 	};
 
 	return (

@@ -3,6 +3,7 @@
 import { Avatar, Box } from "@mui/material";
 import { useAuth0 } from "@auth0/auth0-react";
 import Link from "next/link";
+import { Explain } from "./components/explain";
 
 export default function Home() {
 	const { user, isAuthenticated, isLoading, loginWithRedirect, logout } =
@@ -10,6 +11,27 @@ export default function Home() {
 
 	return (
 		<div style={{ textAlign: "center", marginTop: "50px", padding: "0 20px" }}>
+			<div
+				style={{
+					display: "flex",
+					padding: "0 20px",
+					marginBottom: "20px",
+				}}
+			>
+				<Link
+					href="/"
+					style={{
+						padding: "8px 16px",
+						backgroundColor: "#4285F4",
+						color: "white",
+						borderRadius: "4px",
+						textDecoration: "none",
+						fontSize: "14px",
+					}}
+				>
+					TOPページへ戻る
+				</Link>
+			</div>
 			<h1>Auth0 OIDC 認証</h1>
 			<p style={{ marginBottom: "20px" }}>
 				Auth0 OIDCを使用した認証の例です。
@@ -103,6 +125,9 @@ export default function Home() {
 					</button>
 				</Box>
 			)}
+			<Box sx={{ mt: 5 }}>
+				<Explain />
+			</Box>
 		</div>
 	);
 }

@@ -10,7 +10,6 @@ import {
 	Container,
 	Divider,
 	Grid,
-	Link,
 	Toolbar,
 	Typography,
 } from "@mui/material";
@@ -24,9 +23,6 @@ const HomePage = () => {
 		<>
 			<AppBar position="static" color="transparent" elevation={0}>
 				<Toolbar>
-					<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-						認証サンプル
-					</Typography>
 					<Button
 						color="inherit"
 						href="https://github.com/taigamur/auth_study"
@@ -56,14 +52,6 @@ const HomePage = () => {
 						sx={{ fontWeight: 600 }}
 					>
 						認証のサンプル実装
-					</Typography>
-					<Typography
-						variant="subtitle1"
-						color="text.secondary"
-						align="center"
-						sx={{ mb: 4, maxWidth: "600px" }}
-					>
-						このアプリケーションでは、いくつかの認証方法を試すことができます。
 					</Typography>
 				</Box>
 
@@ -179,20 +167,6 @@ const HomePage = () => {
 				</Grid>
 
 				<Divider sx={{ mb: 4 }} />
-
-				<Box sx={{ textAlign: "center", mb: 8 }}>
-					<Typography variant="body2" color="text.secondary" align="center">
-						© 2025 認証サンプル実装 -
-						<Link
-							href="https://github.com/taigamur/auth_study"
-							underline="hover"
-							target="_blank"
-							sx={{ ml: 0.5 }}
-						>
-							GitHub（taigamur/auth_study）
-						</Link>
-					</Typography>
-				</Box>
 			</Container>
 		</>
 	);

@@ -1,4 +1,6 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+"use client";
+
+import { Box, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { useAuth } from "../auth_context";
 
@@ -34,52 +36,54 @@ const SignupForm = () => {
 			setError("ユーザー登録に失敗しました。");
 		}
 	};
+
 	return (
-		<>
-			<Box
-				sx={{
-					display: "flex",
-					flexDirection: "column",
-					alignItems: "center",
-					justifyContent: "center",
-				}}
-			>
-				<Box>登録</Box>
-				<Box component="form" onSubmit={handleSubmit} sx={{ width: "300px" }}>
-					<TextField
-						label="Name"
-						variant="outlined"
-						fullWidth
-						margin="normal"
-						value={name}
-						onChange={(e) => setName(e.target.value)}
-					/>
-					<TextField
-						label="パスワード"
-						type="password"
-						variant="outlined"
-						fullWidth
-						margin="normal"
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-					/>
-					{error && (
-						<Typography color="error" variant="body2">
-							{error}
-						</Typography>
-					)}
-					<Button
-						type="submit"
-						variant="contained"
-						color="primary"
-						fullWidth
-						sx={{ mt: 2 }}
-					>
-						登録
-					</Button>
-				</Box>
+		<div style={{ maxWidth: "400px", margin: "0 auto" }}>
+			<h2>アカウント登録</h2>
+			<Box component="form" onSubmit={handleSubmit} sx={{ width: "100%" }}>
+				<TextField
+					label="Name"
+					variant="outlined"
+					fullWidth
+					margin="normal"
+					value={name}
+					onChange={(e) => setName(e.target.value)}
+				/>
+				<TextField
+					label="パスワード"
+					type="password"
+					variant="outlined"
+					fullWidth
+					margin="normal"
+					value={password}
+					onChange={(e) => setPassword(e.target.value)}
+				/>
+				{error && (
+					<Typography color="error" variant="body2" sx={{ mt: 1 }}>
+						{error}
+					</Typography>
+				)}
+				<button
+					type="submit"
+					style={{
+						padding: "12px 24px",
+						backgroundColor: "#34A853",
+						color: "white",
+						border: "none",
+						borderRadius: "4px",
+						cursor: "pointer",
+						fontSize: "16px",
+						width: "100%",
+						marginTop: "16px",
+						display: "inline-flex",
+						alignItems: "center",
+						justifyContent: "center",
+					}}
+				>
+					登録
+				</button>
 			</Box>
-		</>
+		</div>
 	);
 };
 

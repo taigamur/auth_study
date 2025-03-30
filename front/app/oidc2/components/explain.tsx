@@ -26,7 +26,7 @@ export const Explain = () => {
 			<Box sx={{ textAlign: "center", mt: 2 }}>
 				<Link
 					underline="none"
-					href="https://zesty-address-ae0.notion.site/Auth0-1bc7d2e4bbf8801fa72deb54c7bac101"
+					href="https://zesty-address-ae0.notion.site/Google-1bc7d2e4bbf8809589e9cb30ef06cc9f"
 					target="_blank"
 				>
 					<Box
@@ -38,7 +38,7 @@ export const Explain = () => {
 						}}
 					>
 						<OpenInNewIcon fontSize="small" />
-						<Box>Auth0の仕組み ( Notion )</Box>
+						<Box>Googleを利用した認証の仕組み ( Notion )</Box>
 					</Box>
 				</Link>
 			</Box>

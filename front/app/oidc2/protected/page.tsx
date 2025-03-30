@@ -160,6 +160,19 @@ export default function ProtectedPage() {
 				>
 					ホームに戻る
 				</Link>
+				<Link
+					href="/"
+					style={{
+						padding: "10px 20px",
+						backgroundColor: "#34A853",
+						color: "white",
+						borderRadius: "4px",
+						textDecoration: "none",
+						marginLeft: "10px",
+					}}
+				>
+					TOPページへ戻る
+				</Link>
 			</div>
 
 			{/* バックエンドAPIのレスポンス表示 */}

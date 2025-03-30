@@ -3,12 +3,34 @@
 import { Avatar, Box } from "@mui/material";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+import { Explain } from "./components/explain";
 
 export default function Home() {
 	const { data: session, status } = useSession();
 
 	return (
 		<div style={{ textAlign: "center", marginTop: "50px", padding: "0 20px" }}>
+			<div
+				style={{
+					display: "flex",
+					padding: "0 20px",
+					marginBottom: "20px",
+				}}
+			>
+				<Link
+					href="/"
+					style={{
+						padding: "8px 16px",
+						backgroundColor: "#4285F4",
+						color: "white",
+						borderRadius: "4px",
+						textDecoration: "none",
+						fontSize: "14px",
+					}}
+				>
+					TOPページへ戻る
+				</Link>
+			</div>
 			<h1>Google OIDC 認証</h1>
 			<p style={{ marginBottom: "20px" }}>
 				Google OIDCを使用した認証の例です。
@@ -98,6 +120,9 @@ export default function Home() {
 					</button>
 				</Box>
 			)}
+			<Box sx={{ mt: 5 }}>
+				<Explain />
+			</Box>
 		</div>
 	);
 }
